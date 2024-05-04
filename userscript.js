@@ -11,7 +11,7 @@
 
 // Notes
 // Pressing 'i' will hide the display
-// TAS display is currently disabled, so it will say N/A (Line 25,26, and 66)
+// TAS display is currently disabled (Line 25,26, and 66)
 
 
 (function() {
