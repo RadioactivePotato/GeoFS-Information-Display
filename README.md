@@ -1,5 +1,5 @@
 # GeoFS Information Display
-![image](v2.2.png)
+![image](assets/v2.2.png)
 
 Displays `Indicated Airspeed`, `Mach`, `Ground Speed`, `Altitude`, `Above Ground Level`, `Heading`, `Vertical Speed`
 
