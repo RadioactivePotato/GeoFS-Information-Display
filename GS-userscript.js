@@ -9,6 +9,8 @@
 // @grant        none
 // ==/UserScript==
 
+// This userscript only display ground speed
+
 (function() {
     'use strict';
 
