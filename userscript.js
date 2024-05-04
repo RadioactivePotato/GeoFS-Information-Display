@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         GeoFS Information Display
-// @version      2.0
+// @version      2.1
 // @description  Displays Speed/Altitude/Heading/VS on the bottom right of the screen
 // @author       krunchiekrunch
 // @match        https://www.geo-fs.com/geofs.php?v=*
