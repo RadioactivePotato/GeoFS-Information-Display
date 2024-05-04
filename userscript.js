@@ -17,7 +17,7 @@
 (function() {
     'use strict';
 
-    // Function to update flight data display
+    // Update display
     function updateFlightDataDisplay() {
         // Check if geofs.animation.values is available
         if (geofs.animation.values) {
@@ -31,7 +31,7 @@
             var heading = geofs.animation.values.heading360 ? Math.round(geofs.animation.values.heading360) : 'N/A';
             var verticalSpeed = geofs.animation.values.verticalSpeed !== undefined ? Math.round(geofs.animation.values.verticalSpeed) : 'N/A';
 
-            // Update the flight data display with formatted values
+            // Display css
             var flightDataElement = document.getElementById('flightDataDisplay');
             if (!flightDataElement) {
                 flightDataElement = document.createElement('div');
@@ -56,7 +56,7 @@
                 document.body.appendChild(flightDataElement);
             }
 
-            // Hide the flight data display if 'i' key is pressed
+            // Hide the flight data display if 'i' is pressed
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'i') {
                     flightDataElement.style.display = flightDataElement.style.display === 'none' ? 'inline-block' : 'none';
@@ -75,6 +75,6 @@
         }
     }
 
-    // Update flight data display every 0.1 seconds
+    // Update flight data display every 0.1 second
     setInterval(updateFlightDataDisplay, 100);
 })();
