@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         GeoFS Information Display
-// @version      2.1
+// @version      2.2
 // @description  Displays Speed/Altitude/Heading/VS on the bottom right of the screen
 // @author       krunchiekrunch
 // @match        https://www.geo-fs.com/geofs.php?v=*
@@ -11,7 +11,7 @@
 
 // Notes
 // Pressing 'i' will hide the display
-// TAS display is currently disabled (Line 25,26, and 66)
+// The AGL display will have a offset that varies from aircraft to aircraft, for example, the 737-700 have a offset of 10 while the C172 have a offset of 5.
 
 
 (function() {
@@ -22,13 +22,12 @@
         // Check if geofs.animation.values is available
         if (geofs.animation.values) {
             // Retrieve and format the required values
-            //var tas = geofs.animation.values.tas ? geofs.animation.values.tas.toFixed(1) : 'N/A';
-            var tas = 'Disabled';
             var kias = geofs.animation.values.kias ? geofs.animation.values.kias.toFixed(1) : 'N/A';
             var mach = geofs.animation.values.mach ? geofs.animation.values.mach.toFixed(2) : 'N/A';
             var groundSpeed = geofs.animation.values.groundSpeed ? geofs.animation.values.groundSpeed.toFixed(1) : 'N/A';
             var altitude = geofs.animation.values.altitude ? Math.round(geofs.animation.values.altitude) : 'N/A';
             var heading = geofs.animation.values.heading360 ? Math.round(geofs.animation.values.heading360) : 'N/A';
+            var agl = (geofs.animation.values.altitude !== undefined && geofs.animation.values.groundElevationFeet !== undefined) ? Math.round(geofs.animation.values.altitude - geofs.animation.values.groundElevationFeet) : 'N/A';
             var verticalSpeed = geofs.animation.values.verticalSpeed !== undefined ? Math.round(geofs.animation.values.verticalSpeed) : 'N/A';
 
             // Display css
@@ -64,17 +63,17 @@
             });
 
             flightDataElement.innerHTML = `
-                <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">TAS ${tas}</span> |
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">KIAS ${kias}</span> |
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">Mach ${mach}</span> |
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">GS ${groundSpeed}</span> |
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">ALT ${altitude}</span> |
+                <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">AGL ${agl}</span> |
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">HDG ${heading}</span> |
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">V/S ${verticalSpeed === 'N/A' ? 'N/A' : verticalSpeed}</span>
             `;
         }
     }
 
-    // Update flight data display every 0.1 second
+    // Update flight data display every 100ms
     setInterval(updateFlightDataDisplay, 100);
 })();
