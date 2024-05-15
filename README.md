@@ -5,3 +5,6 @@ Displays `Indicated Airspeed`, `Mach`, `Ground Speed`, `Altitude`, `Above Ground
 
 ## Notes
 Press 'i' to hide the display
+
+## Planned features
+- Click-through display
