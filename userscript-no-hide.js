@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name         GeoFS Information Display - no hide
-// @version      2.2
+// @name         GeoFS Information Display
+// @version      2.3
 // @description  Displays Speed/Altitude/Heading/VS on the bottom right of the screen
 // @author       krunchiekrunch
 // @match        https://www.geo-fs.com/geofs.php?v=*
@@ -9,9 +9,8 @@
 // @grant        none
 // ==/UserScript==
 
-// Notes
-// This script doesn't have the function to hide the display, use this if GeoFS lags when a key is pressed down.
-// The AGL display will have a offset that varies from aircraft to aircraft, for example, the 737-700 have a offset of 10 while the C172 have a offset of 5.
+// Note
+// The AGL display NO LONGER have a offset that varies from aircraft to aircraft. - Fixed by GGamerGGuy on Discord
 
 
 (function() {
@@ -27,7 +26,7 @@
             var groundSpeed = geofs.animation.values.groundSpeed ? geofs.animation.values.groundSpeed.toFixed(1) : 'N/A';
             var altitude = geofs.animation.values.altitude ? Math.round(geofs.animation.values.altitude) : 'N/A';
             var heading = geofs.animation.values.heading360 ? Math.round(geofs.animation.values.heading360) : 'N/A';
-            var agl = (geofs.animation.values.altitude !== undefined && geofs.animation.values.groundElevationFeet !== undefined) ? Math.round(geofs.animation.values.altitude - geofs.animation.values.groundElevationFeet) : 'N/A';
+            var agl = (geofs.animation.values.altitude !== undefined && geofs.animation.values.groundElevationFeet !== undefined) ? Math.round((geofs.animation.values.altitude - geofs.animation.values.groundElevationFeet) + (geofs.aircraft.instance.collisionPoints[geofs.aircraft.instance.collisionPoints.length - 2].worldPosition[2]*3.2808399)) : 'N/A';
             var verticalSpeed = geofs.animation.values.verticalSpeed !== undefined ? Math.round(geofs.animation.values.verticalSpeed) : 'N/A';
 
             // Display css
