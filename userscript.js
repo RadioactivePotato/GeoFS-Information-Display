@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         GeoFS Information Display
-// @version      2.3
+// @version      2.4
 // @description  Displays Speed/Altitude/Heading/VS on the bottom right of the screen
 // @author       krunchiekrunch
 // @match        https://www.geo-fs.com/geofs.php?v=*
@@ -11,7 +11,7 @@
 
 // Notes
 // Pressing 'i' will hide the display
-// The AGL display NO LONGER have a offset that varies from aircraft to aircraft. - Fixed by GGamerGGuy on Discord
+// The AGL display NO LONGER have a offset that varies from aircraft to aircraft. (Since 2.3) - Fixed by GGamerGGuy on Discord
 
 
 (function() {
@@ -52,6 +52,7 @@
                 flightDataElement.style.lineHeight = '36px';
                 flightDataElement.style.verticalAlign = 'middle';
                 flightDataElement.style.zIndex = '9999';
+                flightDataElement.style.pointerEvents = 'none'; // Make the display clickable through
                 document.body.appendChild(flightDataElement);
             }
 
