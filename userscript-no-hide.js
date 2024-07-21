@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         GeoFS Information Display
-// @version      2.4
-// @description  Displays Speed/Altitude/Heading/VS on the bottom right of the screen
+// @name         GeoFS Information Display test
+// @version      2.5
+// @description  Displays Speed/Altitude/Heading/VS/Throttle on the bottom right of the screen
 // @author       krunchiekrunch
 // @match        https://www.geo-fs.com/geofs.php?v=*
 // @match        https://*.geo-fs.com/geofs.php*
@@ -12,7 +12,6 @@
 // Notes
 // The AGL display NO LONGER have a offset that varies from aircraft to aircraft. (Since 2.3) - Fixed by GGamerGGuy on Discord
 
-
 (function() {
     'use strict';
 
@@ -20,7 +19,7 @@
     function updateFlightDataDisplay() {
         // Check if geofs.animation.values is available
         if (geofs.animation.values) {
-            // Retrieve and format the required values
+            // Get and format the values
             var kias = geofs.animation.values.kias ? geofs.animation.values.kias.toFixed(1) : 'N/A';
             var mach = geofs.animation.values.mach ? geofs.animation.values.mach.toFixed(2) : 'N/A';
             var groundSpeed = geofs.animation.values.groundSpeed ? geofs.animation.values.groundSpeed.toFixed(1) : 'N/A';
@@ -28,6 +27,7 @@
             var heading = geofs.animation.values.heading360 ? Math.round(geofs.animation.values.heading360) : 'N/A';
             var agl = (geofs.animation.values.altitude !== undefined && geofs.animation.values.groundElevationFeet !== undefined) ? Math.round((geofs.animation.values.altitude - geofs.animation.values.groundElevationFeet) + (geofs.aircraft.instance.collisionPoints[geofs.aircraft.instance.collisionPoints.length - 2].worldPosition[2]*3.2808399)) : 'N/A';
             var verticalSpeed = geofs.animation.values.verticalSpeed !== undefined ? Math.round(geofs.animation.values.verticalSpeed) : 'N/A';
+            var throttle = geofs.animation.values.throttle !== undefined ? (geofs.animation.values.throttle === 0 ? 'IDLE' : (geofs.animation.values.throttle * 100).toFixed(0) + '%') : 'N/A';
 
             // Display css
             var flightDataElement = document.getElementById('flightDataDisplay');
@@ -62,7 +62,8 @@
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">ALT ${altitude}</span> |
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">AGL ${agl}</span> |
                 <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">HDG ${heading}</span> |
-                <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">V/S ${verticalSpeed === 'N/A' ? 'N/A' : verticalSpeed}</span>
+                <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">V/S ${verticalSpeed === 'N/A' ? 'N/A' : verticalSpeed}</span> |
+                <span style="background: 0 0; border: none; border-radius: 2px; color: #000; display: inline-block; padding: 0 8px;">THR ${throttle}</span>
             `;
         }
     }
