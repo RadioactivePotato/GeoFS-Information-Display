@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         GeoFS Information Display test
+// @name         GeoFS Information Display
 // @version      2.5
 // @description  Displays Speed/Altitude/Heading/VS/Throttle on the bottom right of the screen
 // @author       krunchiekrunch
