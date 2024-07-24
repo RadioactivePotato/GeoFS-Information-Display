@@ -7,6 +7,7 @@
 // @match        https://*.geo-fs.com/geofs.php*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=geo-fs.com
 // @grant        none
+// @license      GPL-3.0
 // ==/UserScript==
 
 // This userscript only display ground speed
